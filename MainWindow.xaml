@@ -6,39 +6,44 @@
         xmlns:local="clr-namespace:TourPlannerApp"
         mc:Ignorable="d"
         Title="TourPlanner" Height="600" Width="1000">
+    <!--
+    <Window.DataContext>
+        <local:TextViewModel/>
+    </Window.DataContext>
+    -->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="700"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="70"/>
         </Grid.ColumnDefinitions>
-            <Grid Grid.Row="0" Grid.ColumnSpan="3" >
-                <Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" >
+            <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="70"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0" x:Name="Button1" Content="Button1"/>
-            <Button Grid.Row="0" Grid.Column="1" x:Name="Button2" Content="Button2"/>
-            <Button Grid.Row="0" Grid.Column="2" x:Name="Button3" Content="Button3"/>
-            <Button Grid.Row="0" Grid.Column="6" x:Name="Button4" Content="Button4"/>
+            <Button x:Name="Button1" Content="Button 1" Grid.Row="0" Grid.Column="0"/>
+            <Button x:Name="Button2" Content="Button 2" Grid.Row="0" Grid.Column="1"/>
+            <Button x:Name="Button3" Content="Button 3" Grid.Row="0" Grid.Column="2"/>
         </Grid>
-        
-        <Border Grid.Row="2" Grid.Column="1" Background="Azure" BorderBrush="Black" BorderThickness="2">
-            <TextBlock x:Name="overview" Text="hier könnten alle Touren aufgelistet werden."  />
+
+        <TextBox x:Name="newTourName" Grid.Column="1" HorizontalAlignment="Left" Margin="0,40,0,0" Grid.Row="1" Text="new Tour" VerticalAlignment="Center" Width="445" Height="30"/>
+        <Button x:Name="addTour" Content="Tour erstellen" Click="AddTour_Click" Grid.Column="1" HorizontalAlignment="Left" Margin="450,40,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="100"/>
+        <Border Grid.Row="1" Grid.Column="1" Background="Azure" BorderBrush="Black" BorderThickness="2" Margin="0,80,0,0" Grid.RowSpan="2">
+            <TextBlock x:Name="allTours" Text="{Binding Path=tours}"/>
         </Border>
-        
-        
+
     </Grid>
 </Window>

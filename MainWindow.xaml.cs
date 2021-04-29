@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,11 +20,55 @@ namespace TourPlannerApp
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
+        }
+
+        private string _text;
+        public string tours
+        {
+            get
+            {
+                return _text;
+            }
+            set
+            {
+                if (_text != value)
+                {
+                    _text = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Raises this object's PropertyChanged event.
+        /// </summary>
+        /// <param name="propertyName">The property that has a new value.</param>
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChangedEventHandler handler = this.PropertyChanged;
+            if (handler != null)
+            {
+                var e = new PropertyChangedEventArgs(propertyName);
+                handler(this, e);
+            }
+        }
+        #endregion
+
+        private void AddTour_Click(object sender, RoutedEventArgs e)
+        {
+            tours += $"\n - {newTourName.Text}";
         }
     }
+
+
 }
